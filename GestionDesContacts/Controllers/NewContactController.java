@@ -9,25 +9,25 @@ package Controllers;
  */
 public class NewContactController
 {
-    private Models.ContactModel model;
     private Views.NewContactView view;
     
     private static NewContactController instance = new NewContactController();
     
     private NewContactController(){
-        this.model = new Models.ContactModel();
         this.view = new Views.NewContactView();
-        model.addObserver(view);
-        
+        Data.Globals.getInstance().addObserver(view);
         addListeners();
     }
     
     private void addListeners(){
+        view.getSaveButton().addActionListener(new Actions.ContactActions.SaveNewContactAction());
+        view.getCancelButton().addActionListener(new Actions.ContactActions.CancelNewContactAction());
     }
     
     public static NewContactController getInstance(){
         if(instance == null) instance = new NewContactController();
         return instance;
     }
+    
     public Views.NewContactView getView(){return this.view;}
 }

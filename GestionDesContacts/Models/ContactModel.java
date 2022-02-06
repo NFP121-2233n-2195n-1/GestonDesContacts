@@ -2,6 +2,7 @@ package Models;
 import java.util.Observable;
 import java.util.Map;
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -10,9 +11,8 @@ import java.io.Serializable;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class ContactModel extends Observable implements Serializable
+public class ContactModel implements Serializable
 {
-    private static int next = 0;
     private int contactID;
     private String firstName;
     private String lastName;
@@ -20,9 +20,11 @@ public class ContactModel extends Observable implements Serializable
     private Map<Integer,PhoneNumber> phoneNumbers;
     private Map<Integer,GroupModel> groups;
     
-    public ContactModel(){
-        contactID = next;
-        next++;
+    public ContactModel(String firstName, String lastName, String city){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        contactID = (int) (new Date().getTime()/1000);
     }
     
     public int getContactID(){ return this.contactID; }
@@ -36,18 +38,12 @@ public class ContactModel extends Observable implements Serializable
     
     public void setFirstName(String firstName){
         this.firstName = firstName;
-        setChanged();
-        notifyObservers();
     }
     public void setLastName(String lastName){
         this.lastName = lastName;
-        setChanged();
-        notifyObservers();
     }
     public void setCity(String city){
         this.city = city;
-        setChanged();
-        notifyObservers();
     }
     
     public String toString(){
@@ -56,25 +52,17 @@ public class ContactModel extends Observable implements Serializable
     
     public void addGroup(GroupModel group){
         groups.put(group.getGroupID(), group);
-        setChanged();
-        notifyObservers();
     }
     
     public void addPhoneNumber(PhoneNumber phoneNumber){
         phoneNumbers.put(phoneNumber.getPhoneNumberID(), phoneNumber);
-        setChanged();
-        notifyObservers();
     }
     
     public void removeGroup(int groupID){
         this.groups.remove(groupID);
-        setChanged();
-        notifyObservers();
     }
     
     public void removePhoneNumber(int phoneNumberID){
         this.phoneNumbers.remove(phoneNumberID);
-        setChanged();
-        notifyObservers();
     }
 }

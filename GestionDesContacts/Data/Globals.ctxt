@@ -17,4 +17,6 @@ comment7.params=
 comment7.target=java.awt.Font\ getFont()
 comment8.params=
 comment8.target=java.awt.Font\ getBigFont()
-numComments=9
+comment9.params=model
+comment9.target=void\ saveContactToFolder(Models.ContactModel)
+numComments=10

@@ -5,6 +5,8 @@ import java.util.Map;
 import java.io.FileInputStream;
 import java.util.HashMap;
 import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 
 /**
@@ -60,4 +62,14 @@ public class Data
         return map;
     }
 
+    public void saveContactsToFolder(Map<Integer,Models.ContactModel> map){
+        try{
+            FileOutputStream out = new FileOutputStream(mainDirectory+"\\contacts.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(out);
+            oos.writeObject(map);
+            oos.flush();
+        }
+        catch(java.io.EOFException ex){System.out.println(ex.getMessage());}
+        catch(Exception e){System.out.println(e.getMessage());}
+    }
 }

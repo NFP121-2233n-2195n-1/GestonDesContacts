@@ -7,7 +7,7 @@ package Views;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class ViewContactsView
+public class ViewContactView
 {
     // instance variables - replace the example below with your own
     private int x;
@@ -15,7 +15,7 @@ public class ViewContactsView
     /**
      * Constructor for objects of class ViewContactsView
      */
-    public ViewContactsView()
+    public ViewContactView()
     {
         // initialise instance variables
         x = 0;

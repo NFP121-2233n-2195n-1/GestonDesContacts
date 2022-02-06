@@ -9,16 +9,12 @@ package Controllers;
  */
 public class ContactsController
 {
-    private Models.ContactModel model;
     private Views.ContactsView view;
-    
     private static ContactsController instance = new ContactsController();
     
     private ContactsController(){
-        this.model = new Models.ContactModel();
         this.view = new Views.ContactsView();
-        model.addObserver(view);
-        
+        Data.Globals.getInstance().addObserver(view);
         addListeners();
     }
     

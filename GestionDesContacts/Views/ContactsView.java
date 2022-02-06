@@ -103,6 +103,8 @@ public class ContactsView extends JPanel implements Observer
         buttonsPanel.add(viewContact);
         buttonsPanel.add(updateContact);
         buttonsPanel.add(deleteContact);
+        
+        setDataInList(null);
     }
     
     public JButton getSearchButton(){return this.searchButton;}
@@ -110,14 +112,15 @@ public class ContactsView extends JPanel implements Observer
     public void setDataInList(Map<Integer, Models.ContactModel> filteredContacts){
         if(filteredContacts  == null) filteredContacts = Data.Globals.getInstance().getContacts();
         this.filteredContacts = filteredContacts;
-        
-        //Iterator it = filteredContacts.entrySet().iterator();
-        //while(it.hasNext()){
-        //    Map.Entry<Integer,Models.ContactModel> pair = (Map.Entry<Integer,Models.ContactModel>) it.next();
-        //    contactsListModel.addElement(pair.getValue());
-        //}
+        contactsListModel= new DefaultListModel();
+        Iterator it = filteredContacts.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry<Integer,Models.ContactModel> pair = (Map.Entry<Integer,Models.ContactModel>) it.next();
+            contactsListModel.addElement(pair.getValue());
+        }
         
         contactsList.setModel(contactsListModel);
+        contactsList.revalidate();
     }   
     
     public void addSearchActionListener(ActionListener a){
@@ -125,6 +128,7 @@ public class ContactsView extends JPanel implements Observer
     }
     
     public void update(Observable o, Object arg){
+        setDataInList(null);
         this.revalidate();
         this.repaint();
     }

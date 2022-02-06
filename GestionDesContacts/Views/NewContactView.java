@@ -99,7 +99,7 @@ public class NewContactView extends JPanel implements Observer
         
         tablePanel.setLayout(new BorderLayout());
         tablePanel.add(tableTitle, BorderLayout.NORTH);
-        tablePanel.add(table, BorderLayout.CENTER);
+        tablePanel.add(scrollPane, BorderLayout.CENTER);
         
         groupsPanel.setLayout(new BorderLayout());
         groupsPanel.add(titleGroup, BorderLayout.NORTH);

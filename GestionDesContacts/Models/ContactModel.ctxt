@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=ContactModel
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ ContactModel\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=ContactModel()
+comment1.params=firstName\ lastName\ city
+comment1.target=ContactModel(java.lang.String,\ java.lang.String,\ java.lang.String)
 comment10.params=city
 comment10.target=void\ setCity(java.lang.String)
 comment11.params=

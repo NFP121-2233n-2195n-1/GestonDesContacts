@@ -74,14 +74,12 @@ public class MainFrame extends JFrame
         return instance;
     }
     
-       
     public void setCustomDesign() {
         UIManager.put("Panel.background", Color.white);
         UIManager.put("Button.background",Data.Globals.getLightBlueColor());
         UIManager.put("Button.preferredsize",new Dimension(300,20));
         UIManager.put("Button.size", new Dimension(200,30) );
     }
-    
     
     public void setMyFontToAllComponents() {
         UIManager.put("Label.font", Data.Globals.getFont());
