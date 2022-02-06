@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=ContactsView
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ContactsView\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=ContactsView()
+comment2.params=
+comment2.target=javax.swing.JButton\ getSearchButton()
+comment3.params=filteredContacts
+comment3.target=void\ setDataInList(java.util.Map)
+comment4.params=a
+comment4.target=void\ addSearchActionListener(java.awt.event.ActionListener)
+comment5.params=o\ arg
+comment5.target=void\ update(java.util.Observable,\ java.lang.Object)
+numComments=6

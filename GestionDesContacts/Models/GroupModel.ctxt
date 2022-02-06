@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=GroupModel
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ GroupModel\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=GroupModel()
+comment2.params=
+comment2.target=int\ getGroupID()
+comment3.params=
+comment3.target=java.lang.String\ getGroupName()
+comment4.params=
+comment4.target=java.lang.String\ getGroupDescription()
+comment5.params=
+comment5.target=java.util.Map\ getContacts()
+comment6.params=groupName
+comment6.target=void\ setGroupName(java.lang.String)
+comment7.params=groupDescription
+comment7.target=void\ setGroupDescription(java.lang.String)
+comment8.params=contact
+comment8.target=void\ addContact(ContactModel)
+comment9.params=contact
+comment9.target=void\ removeContact(ContactModel)
+numComments=10

@@ -1,0 +1,15 @@
+/CancelNewContactAction.class
+/CancelUpdateContactAction.class
+/DeleteAction.class
+/IContactAction.class
+/IOpenContactAction.class
+/OpenContacts.class
+/OpenNewContact.class
+/OpenUpdateContact.class
+/OpenViewContact.class
+/SaveNewContactAction.class
+/SaveUpdateContactAction.class
+/SearchContactAction.class
+/SortCityAction.class
+/SortFNameAction.class
+/SortLNameAction.class
