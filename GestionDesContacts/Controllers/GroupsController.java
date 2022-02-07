@@ -9,27 +9,22 @@ package Controllers;
  */
 public class GroupsController
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class GroupsController
-     */
+    private Views.GroupsView view;
+    private static GroupsController instance = new GroupsController();
+    
     public GroupsController()
     {
-        // initialise instance variables
-        x = 0;
+        this.view = new Views.GroupsView();
+        Data.Globals.getInstance().addObserver(view);
+        addListeners();
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    
+    private void addListeners(){
     }
+    
+    public static GroupsController getInstance(){
+        if(instance == null) instance = new GroupsController();
+        return instance;
+    }
+    public Views.GroupsView getView(){return this.view;}
 }

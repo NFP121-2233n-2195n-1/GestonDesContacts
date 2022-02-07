@@ -47,7 +47,9 @@ public class MainFrame extends JFrame
         
         createContact.addActionListener(new Actions.ContactActions.OpenNewContact());
         listContacts.addActionListener(new Actions.ContactActions.OpenContacts());
-    
+        listGroups.addActionListener(new Actions.GroupActions.OpenGroups());
+        createGroup.addActionListener(new Actions.GroupActions.OpenNewGroup());
+        
         setCustomDesign();
         setMyFontToAllComponents();
         
