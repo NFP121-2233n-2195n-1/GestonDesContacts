@@ -1,9 +1,8 @@
 package Data;
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
+import java.util.LinkedHashMap;
 import java.io.FileInputStream;
-import java.util.HashMap;
 import java.io.ObjectInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -21,6 +20,8 @@ public class Data
     
     Data(){
         createFiles();
+        //set Serial Numbers
+        
     }
     
     public void createFiles(){
@@ -38,31 +39,31 @@ public class Data
     
     public static File getMainDirectory(){return mainDirectory;}
     
-    public Map<Integer,Models.ContactModel> getContactsData(){
-        HashMap map = new HashMap();
+    public LinkedHashMap<Integer,Models.ContactModel> getContactsData(){
+        LinkedHashMap map = new LinkedHashMap();
         try{
             FileInputStream in = new FileInputStream(mainDirectory+"\\contacts.txt");
             ObjectInputStream ois = new ObjectInputStream(in);
-            map = (HashMap) (ois.readObject());
+            map = (LinkedHashMap) (ois.readObject());
         }catch(java.io.EOFException e){System.out.println(e.getMessage());}
         catch(Exception e){System.out.println(e.getMessage());}
         
         return map;
     }
     
-    public Map<Integer,Models.GroupModel> getGroupsData(){
-        HashMap map = new HashMap();
+    public LinkedHashMap<Integer,Models.GroupModel> getGroupsData(){
+        LinkedHashMap map = new LinkedHashMap();
         try{
             FileInputStream in = new FileInputStream(mainDirectory+"\\groups.txt");
             ObjectInputStream ois = new ObjectInputStream(in);
-            map = (HashMap) (ois.readObject());
+            map = (LinkedHashMap) (ois.readObject());
         }catch(java.io.EOFException e){System.out.println(e.getMessage());}
         catch(Exception e){System.out.println(e.getMessage());}
         
         return map;
     }
 
-    public void saveContactsToFolder(Map<Integer,Models.ContactModel> map){
+    public void saveContactsToFolder(LinkedHashMap<Integer,Models.ContactModel> map){
         try{
             FileOutputStream out = new FileOutputStream(mainDirectory+"\\contacts.txt");
             ObjectOutputStream oos = new ObjectOutputStream(out);

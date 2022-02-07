@@ -1,5 +1,5 @@
 package Data;
-import java.util.Map;
+import java.util.LinkedHashMap;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.Observable;
@@ -12,8 +12,8 @@ import java.util.Observable;
  */
 public class Globals extends Observable
 {
-    private Map<Integer,Models.ContactModel> contacts;
-    private Map<Integer, Models.GroupModel> groups;
+    private LinkedHashMap<Integer,Models.ContactModel> contacts;
+    private LinkedHashMap<Integer, Models.GroupModel> groups;
     private static Globals instance;
     private Data data;
     
@@ -31,11 +31,11 @@ public class Globals extends Observable
         return instance;
     }
     
-    public Map<Integer, Models.ContactModel> getContacts(){
+    public LinkedHashMap<Integer, Models.ContactModel> getContacts(){
         if(this.contacts == null) contacts = data.getContactsData();
         return this.contacts;
     }
-    public Map<Integer,Models.GroupModel> getGroups(){
+    public LinkedHashMap<Integer,Models.GroupModel> getGroups(){
         if(this.groups == null) groups = data.getGroupsData();
         return this.groups;
     }

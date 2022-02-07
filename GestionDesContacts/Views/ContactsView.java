@@ -13,10 +13,11 @@ import java.awt.Color;
 import java.util.Observer;
 import java.util.Observable;
 import javax.swing.DefaultListModel;
-import java.util.Map;
+import java.util.LinkedHashMap;
 import java.util.Iterator;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.util.Map;
 
 /**
  * Write a description of class ContactsView here.
@@ -40,7 +41,7 @@ public class ContactsView extends JPanel implements Observer
     private JList<Models.ContactModel> contactsList;
     private DefaultListModel contactsListModel;
     
-    private Map<Integer, Models.ContactModel> filteredContacts;
+    private LinkedHashMap<Integer, Models.ContactModel> filteredContacts;
     
     public ContactsView(){
         //init variables
@@ -109,10 +110,13 @@ public class ContactsView extends JPanel implements Observer
     
     public JButton getSearchButton(){return this.searchButton;}
     
-    public void setDataInList(Map<Integer, Models.ContactModel> filteredContacts){
+    public void setDataInList(LinkedHashMap<Integer, Models.ContactModel> filteredContacts){
         if(filteredContacts  == null) filteredContacts = Data.Globals.getInstance().getContacts();
         this.filteredContacts = filteredContacts;
         contactsListModel= new DefaultListModel();
+        
+        if(filteredContacts == null) return;
+        
         Iterator it = filteredContacts.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry<Integer,Models.ContactModel> pair = (Map.Entry<Integer,Models.ContactModel>) it.next();

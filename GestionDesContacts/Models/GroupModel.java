@@ -1,7 +1,7 @@
 package Models;
 import java.util.Observable;
 import java.io.Serializable;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 /**
  * Write a description of class GroupModel here.
@@ -15,7 +15,7 @@ public class GroupModel extends Observable implements Serializable
     private int groupID;
     private String groupName;
     private String groupDescription;
-    private Map<Integer, ContactModel> contacts;
+    private LinkedHashMap<Integer, ContactModel> contacts;
     
     GroupModel(){
         groupID = next;
@@ -25,7 +25,7 @@ public class GroupModel extends Observable implements Serializable
     public int getGroupID(){return this.groupID;}
     public String getGroupName(){return this.groupName;}
     public String getGroupDescription(){return this.groupDescription;}
-    public Map<Integer,ContactModel> getContacts(){return this.contacts;}
+    public LinkedHashMap<Integer,ContactModel> getContacts(){return this.contacts;}
     
     public void setGroupName(String groupName){
         this.groupName = groupName;

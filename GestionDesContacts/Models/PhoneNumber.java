@@ -1,4 +1,6 @@
 package Models;
+import java.util.Date;
+import java.io.Serializable;
 
 
 /**
@@ -7,16 +9,17 @@ package Models;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class PhoneNumber
+public class PhoneNumber implements Serializable
 {
     private static int next = 0;
     private int phoneNumberID;
     private String regionCode;
     private String phoneNumber;
     
-    PhoneNumber(String regionCode, String phoneNumber){
+    public PhoneNumber(String regionCode, String phoneNumber){
         this.regionCode = regionCode;
         this.phoneNumber = phoneNumber;
+        phoneNumberID = (int) (new Date().getTime()/1000);
     }
     
     public int getPhoneNumberID(){return this.phoneNumberID;}

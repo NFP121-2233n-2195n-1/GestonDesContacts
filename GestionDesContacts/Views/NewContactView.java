@@ -8,7 +8,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;
 
-
 /**
  * Write a description of class NewContactView here.
  *
@@ -118,6 +117,7 @@ public class NewContactView extends JPanel implements Observer
     public JTextField getLastNameTextField(){return this.lastNameText;}
     public JTextField getCityTextField(){return this.cityText;}
     public JTable getTable(){return this.table;}
+    public DefaultTableModel getTableModel(){return this.tableModel;}
     public JButton getSaveButton(){return this.saveButton;}
     public JButton getCancelButton(){return this.cancelButton;}
 }
