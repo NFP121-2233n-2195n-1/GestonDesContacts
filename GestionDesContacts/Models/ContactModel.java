@@ -62,4 +62,9 @@ public class ContactModel implements Serializable
     public void removePhoneNumber(int phoneNumberID){
         this.phoneNumbers.remove(phoneNumberID);
     }
+    
+    public void removeAllPhoneNumbers(){
+        this.phoneNumbers = new LinkedHashMap<Integer, PhoneNumber>();
+    }
+    
 }

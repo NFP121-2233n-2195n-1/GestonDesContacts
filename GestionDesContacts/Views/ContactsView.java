@@ -108,7 +108,23 @@ public class ContactsView extends JPanel implements Observer
         setDataInList(null);
     }
     
+    public LinkedHashMap<Integer, Models.ContactModel> getFilteredContactsMap(){
+        return this.filteredContacts;
+    }
+    
     public JButton getSearchButton(){return this.searchButton;}
+    public JButton getAddNewContactButton(){return this.addNewContact;}
+    public JTextField getSearchInput(){return this.searchInput;}
+    
+    public JList<Models.ContactModel> getList(){return this.contactsList;}
+    
+    public JButton getSortByFirstNameButton(){return this.sortByFirstName;}
+    public JButton getSortByLastNameButton(){return this.sortByLastName;}
+    public JButton getSortByCityButton(){return this.sortByCity;}
+    
+    public JButton getViewContactButton(){return this.viewContact;}
+    public JButton getUpdateContactButton(){return this.updateContact;}
+    public JButton getDeleteContactButton(){return this.deleteContact;}
     
     public void setDataInList(LinkedHashMap<Integer, Models.ContactModel> filteredContacts){
         if(filteredContacts  == null) filteredContacts = Data.Globals.getInstance().getContacts();
@@ -125,10 +141,6 @@ public class ContactsView extends JPanel implements Observer
         
         contactsList.setModel(contactsListModel);
         contactsList.revalidate();
-    }   
-    
-    public void addSearchActionListener(ActionListener a){
-        this.searchButton.addActionListener(a);
     }
     
     public void update(Observable o, Object arg){

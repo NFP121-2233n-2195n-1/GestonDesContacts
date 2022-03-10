@@ -20,8 +20,6 @@ public class Data
     
     Data(){
         createFiles();
-        //set Serial Numbers
-        
     }
     
     public void createFiles(){
@@ -66,6 +64,17 @@ public class Data
     public void saveContactsToFolder(LinkedHashMap<Integer,Models.ContactModel> map){
         try{
             FileOutputStream out = new FileOutputStream(mainDirectory+"\\contacts.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(out);
+            oos.writeObject(map);
+            oos.flush();
+        }
+        catch(java.io.EOFException ex){System.out.println(ex.getMessage());}
+        catch(Exception e){System.out.println(e.getMessage());}
+    }
+    
+    public void saveGroupsToFolder(LinkedHashMap<Integer,Models.GroupModel> map){
+        try{
+            FileOutputStream out = new FileOutputStream(mainDirectory+"\\groups.txt");
             ObjectOutputStream oos = new ObjectOutputStream(out);
             oos.writeObject(map);
             oos.flush();

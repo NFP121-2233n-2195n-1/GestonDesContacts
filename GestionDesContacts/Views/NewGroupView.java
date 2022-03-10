@@ -47,7 +47,7 @@ public class NewGroupView extends JPanel implements Observer
         
         tableHeaderContacts = new String[]{"Contact Name", "City", "Add to group"};
         
-        contactsTableModel = new DefaultTableModel(tableHeaderContacts, 12);
+        contactsTableModel = new DefaultTableModel(tableHeaderContacts, 0);
         contactsTable = new JTable(contactsTableModel);
         contactsScrollPane = new JScrollPane(contactsTable);
         
@@ -87,7 +87,25 @@ public class NewGroupView extends JPanel implements Observer
         
         buttonsPanel.setLayout(new GridLayout(1,2));
         buttonsPanel.add(saveGroup, cancelGroup);
-    }    
+        
+        initialiseInterface();
+        fillData();
+    }
+    
+    public void initialiseInterface(){}
+    
+    public void fillData(){
+        contactsTableModel = new DefaultTableModel(tableHeaderContacts,0){
+            public boolean isCellEditable(int row, int col){
+                switch(col){
+                    case 3:
+                        return true;
+                    default: 
+                        return false;
+                }
+            }
+        };
+    }
     
     public void update(Observable o, Object arg){
         this.revalidate();

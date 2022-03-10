@@ -7,6 +7,8 @@ import java.util.Observable;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Write a description of class ViewContactsView here.
@@ -64,7 +66,14 @@ public class ViewContactView extends JPanel implements Observer
         
         tableTitle = new JLabel("Phone numbers");
         tableHeader = new String[]{"Region Code", "Phone Number"};
-        tableModel = new DefaultTableModel(tableHeader, 4);
+        tableModel = new DefaultTableModel(tableHeader, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               //all cells false
+               return false;
+            };
+        };
+        
         table = new JTable(tableModel);
         scrollPane = new JScrollPane(table);
         
@@ -105,9 +114,49 @@ public class ViewContactView extends JPanel implements Observer
         groupsPanel.setLayout(new BorderLayout());
         groupsPanel.add(titleGroup, BorderLayout.NORTH);
         
+        initialiseInterface();
+        
+        fillData();
+        
+        /*A completer ajouter les groups*/
+    }
+
+    public void fillData(){
+        firstNameText.setText(this.model.getFirstName());
+        lastNameText.setText(this.model.getLastName());
+        cityText.setText(this.model.getCity());
+        
+        //set phone numbers in table model
+        LinkedHashMap<Integer,Models.PhoneNumber> phoneNumbers = this.model.getPhoneNumbers();
+        if(phoneNumbers!=null){
+            
+            this.tableModel = new DefaultTableModel(tableHeader, 0){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                   //all cells false
+                   return false;
+                };
+            };
+            
+            for(Map.Entry<Integer,Models.PhoneNumber> entry: phoneNumbers.entrySet()){
+                Models.PhoneNumber pn = entry.getValue();
+                this.tableModel.addRow(new Object[] {pn.getRegionCode(), pn.getPhoneNumber()});
+            }
+        }
+        table.setModel(tableModel);
+        table.revalidate();
+        
+        /*A completer set groups */
+    }
+
+    public void initialiseInterface(){
+        firstNameText.setEnabled(false);
+        lastNameText.setEnabled(false);
+        cityText.setEnabled(false);
+        /*A completer disable groups check*/
     }
     
-        public void update(Observable o, Object arg){
+    public void update(Observable o, Object arg){
         this.revalidate();
         this.repaint();
     }

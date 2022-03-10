@@ -20,6 +20,14 @@ public class ContactsController
     
     private void addListeners(){
         view.getSearchButton().addActionListener(new Actions.ContactActions.SearchContactAction());
+        view.getAddNewContactButton().addActionListener(new Actions.ContactActions.OpenNewContact());
+        
+        view.getSortByFirstNameButton().addActionListener(new Actions.ContactActions.SortFNameAction());
+        view.getSortByLastNameButton().addActionListener(new Actions.ContactActions.SortLNameAction());
+        view.getSortByCityButton().addActionListener(new Actions.ContactActions.SortCityAction());
+        
+        view.getViewContactButton().addActionListener(new Actions.ContactActions.OpenViewContact());
+        view.getUpdateContactButton().addActionListener(new Actions.ContactActions.OpenUpdateContact());
     }
     
     public static ContactsController getInstance(){

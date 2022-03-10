@@ -13,4 +13,6 @@ comment5.params=
 comment5.target=java.util.LinkedHashMap\ getGroupsData()
 comment6.params=map
 comment6.target=void\ saveContactsToFolder(java.util.LinkedHashMap)
-numComments=7
+comment7.params=map
+comment7.target=void\ saveGroupsToFolder(java.util.LinkedHashMap)
+numComments=8

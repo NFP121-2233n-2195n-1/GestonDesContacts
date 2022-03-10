@@ -9,27 +9,27 @@ package Controllers;
  */
 public class ViewContactController
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class ViewContactController
-     */
-    public ViewContactController()
-    {
-        // initialise instance variables
-        x = 0;
+    private Views.ViewContactView view;
+    private Models.ContactModel model;
+    private static ViewContactController instance = new ViewContactController();
+    
+    private ViewContactController(){
+        addListeners();
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    
+    public void setModel(Models.ContactModel model){
+        this.model = model;
+        this.view = new Views.ViewContactView(model);
+        Data.Globals.getInstance().addObserver(view);
     }
+    
+    private void addListeners(){
+    }
+    
+    public static ViewContactController getInstance(){
+        if(instance == null) instance = new ViewContactController();
+        return instance;
+    }
+    
+    public Views.ViewContactView getView(){return this.view;}
 }

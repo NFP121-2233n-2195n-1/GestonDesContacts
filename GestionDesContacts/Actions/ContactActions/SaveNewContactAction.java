@@ -24,8 +24,9 @@ public class SaveNewContactAction implements IContactAction
         for(int i=0; i<model.getRowCount(); i++){
             String regionCode = ""+model.getValueAt(i,0);
             String regionNumber = ""+model.getValueAt(i,1);
-            if(regionCode.isEmpty() && regionNumber.isEmpty()){
-                break;
+            if((regionCode.isEmpty() && regionNumber.isEmpty())
+                || (regionCode.equals("null") && regionNumber.equals("null"))){
+                continue;
             }
             newContact.addPhoneNumber(new Models.PhoneNumber(regionCode, regionNumber));
         }

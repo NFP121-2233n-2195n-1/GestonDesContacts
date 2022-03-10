@@ -2,6 +2,7 @@ package Models;
 import java.util.Observable;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
+import java.util.Date;
 
 /**
  * Write a description of class GroupModel here.
@@ -11,14 +12,14 @@ import java.util.LinkedHashMap;
  */
 public class GroupModel extends Observable implements Serializable
 {
-    private static int next = 0;
     private int groupID;
+    private static int next = 0;
     private String groupName;
     private String groupDescription;
     private LinkedHashMap<Integer, ContactModel> contacts;
     
     GroupModel(){
-        groupID = next;
+        groupID = (int) (new Date().getTime()/1000)+next;
         next++;
     }
     

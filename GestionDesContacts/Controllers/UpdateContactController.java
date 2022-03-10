@@ -9,27 +9,32 @@ package Controllers;
  */
 public class UpdateContactController
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class UpdateContactController
-     */
-    public UpdateContactController()
-    {
-        // initialise instance variables
-        x = 0;
+    private Views.UpdateContactView view;
+    private Models.ContactModel model;
+    private static UpdateContactController instance = new UpdateContactController();
+    
+    private UpdateContactController(){
+        
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    
+    public void setModel(Models.ContactModel model){
+        this.model = model;
+        this.view = new Views.UpdateContactView(model);
+        addListeners();
+        Data.Globals.getInstance().addObserver(view);
     }
+    
+    public Models.ContactModel getModel(){return this.model;}
+    
+    private void addListeners(){
+        view.getSaveButton().addActionListener(new Actions.ContactActions.SaveUpdateContactAction());
+        view.getCancelButton().addActionListener(new Actions.ContactActions.CancelUpdateContactAction());
+    }
+    
+    public static UpdateContactController getInstance(){
+        if(instance == null) instance = new UpdateContactController();
+        return instance;
+    }
+    
+    public Views.UpdateContactView getView(){return this.view;}
 }

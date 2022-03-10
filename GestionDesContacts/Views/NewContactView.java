@@ -18,7 +18,7 @@ public class NewContactView extends JPanel implements Observer
 {
     private JLabel title;
     private JPanel leftPanel, seperatorPanel, rightPanel, middleRightPanel;
-    private JPanel tablePanel, buttonsPanel;
+    private JPanel tablePanel, buttonsPanel, tableTitlePanel;
     private JPanel groupsPanel, credentialsPanel, bottomContainerPanel;
     
     private JLabel firstNameLabel, lastNameLabel, cityLabel;
@@ -32,7 +32,7 @@ public class NewContactView extends JPanel implements Observer
     private String[] tableHeader;
     
     private JLabel titleGroup;
-    private JButton saveButton, cancelButton;
+    private JButton saveButton, cancelButton, addPhoneNumberButton;
     
     public NewContactView(){
         title = new JLabel(" New Contact");
@@ -46,9 +46,11 @@ public class NewContactView extends JPanel implements Observer
         tablePanel = new JPanel();
         buttonsPanel = new JPanel();
         middleRightPanel = new JPanel();
+        tableTitlePanel = new JPanel();
         
         saveButton = new JButton("Save");
         cancelButton = new JButton("Cancel");
+        addPhoneNumberButton = new JButton("Add");
         
         firstNameLabel = new JLabel("First Name");
         lastNameLabel = new JLabel("Last Name");
@@ -97,8 +99,12 @@ public class NewContactView extends JPanel implements Observer
         middleRightPanel.add(groupsPanel);
         
         tablePanel.setLayout(new BorderLayout());
-        tablePanel.add(tableTitle, BorderLayout.NORTH);
+        tablePanel.add(tableTitlePanel, BorderLayout.NORTH);
         tablePanel.add(scrollPane, BorderLayout.CENTER);
+        
+        tableTitlePanel.setLayout(new GridLayout(1,2));
+        tableTitlePanel.add(tableTitle);
+        tableTitlePanel.add(addPhoneNumberButton);
         
         groupsPanel.setLayout(new BorderLayout());
         groupsPanel.add(titleGroup, BorderLayout.NORTH);
@@ -106,6 +112,8 @@ public class NewContactView extends JPanel implements Observer
         buttonsPanel.setLayout(new GridLayout(1,2));
         buttonsPanel.add(saveButton);
         buttonsPanel.add(cancelButton);
+        
+        /*A completer ajouter les groups and make them editable*/
     }
     
     public void update(Observable o, Object arg){
@@ -113,6 +121,9 @@ public class NewContactView extends JPanel implements Observer
         this.repaint();
     }
     
+    //add function to get groups
+    
+    public JButton getAddPhoneNumberButton(){return this.addPhoneNumberButton;}
     public JTextField getFirstNameTextField(){return this.firstNameText;}
     public JTextField getLastNameTextField(){return this.lastNameText;}
     public JTextField getCityTextField(){return this.cityText;}

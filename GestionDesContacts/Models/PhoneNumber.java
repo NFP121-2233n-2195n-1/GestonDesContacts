@@ -19,7 +19,8 @@ public class PhoneNumber implements Serializable
     public PhoneNumber(String regionCode, String phoneNumber){
         this.regionCode = regionCode;
         this.phoneNumber = phoneNumber;
-        phoneNumberID = (int) (new Date().getTime()/1000);
+        phoneNumberID = (int) (new Date().getTime()/1000)+next;
+        next++;
     }
     
     public int getPhoneNumberID(){return this.phoneNumberID;}
