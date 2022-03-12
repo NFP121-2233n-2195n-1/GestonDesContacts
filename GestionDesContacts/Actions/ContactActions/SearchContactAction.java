@@ -31,22 +31,23 @@ public class SearchContactAction implements IContactAction
     public LinkedHashMap<Integer,Models.ContactModel> searchMapByWord(LinkedHashMap<Integer, Models.ContactModel> filteredContacts, String search){
         //create new map
         LinkedHashMap<Integer,Models.ContactModel> newMap = new LinkedHashMap<Integer,Models.ContactModel>();
-            
-        if(search == null || search == ""){
-            //if search if empty do nothing
-        } else {
-            //iterate contacts
-            for(Map.Entry<Integer,Models.ContactModel> entry: filteredContacts.entrySet()){
-                Models.ContactModel contact = entry.getValue();
-                String firstName = contact.getFirstName();
-                String lastName = contact.getLastName();
-                String city = contact.getCity();
+        
+        if(filteredContacts == null) return newMap;
+        
+        if(search == null || search == "") return filteredContacts;
+
+        //iterate contacts
+        for(Map.Entry<Integer,Models.ContactModel> entry: filteredContacts.entrySet()){
+            Models.ContactModel contact = entry.getValue();
+            String firstName = contact.getFirstName();
+            String lastName = contact.getLastName();
+            String city = contact.getCity();
                 
-                if(firstName.contains(search)||lastName.contains(search)||city.contains(search)){
-                        newMap.put(contact.getContactID(),contact);
-                }
+            if(firstName.contains(search)||lastName.contains(search)||city.contains(search)){
+                    newMap.put(contact.getContactID(),contact);
             }
         }
+        
         return newMap;
     }
 }

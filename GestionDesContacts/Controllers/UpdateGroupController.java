@@ -30,6 +30,11 @@ public class UpdateGroupController
     private void addListeners(){
         view.getSaveGroupButton().addActionListener(new Actions.GroupActions.SaveUpdateGroup());
         view.getCancelGroupButton().addActionListener(new Actions.GroupActions.CancelUpdateGroup());
+
+        //for memento
+        view.getGroupNameTextField().addActionListener(null);
+        view.getGroupDescriptionTextField().addActionListener(null);
+        view.getContactsTable().getModel().addTableModelListener(null);
     }
     
     public static UpdateGroupController getInstance(){

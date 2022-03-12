@@ -46,8 +46,8 @@ public class SortCityActionTest
     }
     
     @Test
-        public void testRandomContactsMapEntry()
-        {
+    public void testRandomContactsMapEntry()
+    {
             Actions.ContactActions.SortCityAction sortCity1 = new Actions.ContactActions.SortCityAction();
             LinkedHashMap<Integer,Models.ContactModel> map = new LinkedHashMap<Integer,Models.ContactModel>();
             
@@ -61,7 +61,8 @@ public class SortCityActionTest
             List<Models.ContactModel> list = new ArrayList<Models.ContactModel>(newMap.values());
             assertEquals(contact2.getContactID(), list.get(0).getContactID());
             assertEquals(contact1.getContactID(), list.get(1).getContactID());
-        }
+    }
+        
      @Test
     public void testSameNameMapEntry(){
         Actions.ContactActions.SortCityAction sortCity1 = new Actions.ContactActions.SortCityAction();
@@ -78,6 +79,7 @@ public class SortCityActionTest
         assertEquals(contact2.getContactID(), list.get(1).getContactID());
         assertEquals(contact1.getContactID(), list.get(0).getContactID()); 
     }
+    
     @Test
     public void testSameFirstLetterMapEntry(){
         Actions.ContactActions.SortCityAction sortCity1 = new Actions.ContactActions.SortCityAction();
