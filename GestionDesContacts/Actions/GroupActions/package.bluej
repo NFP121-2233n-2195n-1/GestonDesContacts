@@ -1,14 +1,14 @@
 #BlueJ package file
-dependency1.from=CancelNewGroup
+dependency1.from=CancelUpdateGroup
 dependency1.to=OpenGroups
 dependency1.type=UsesDependency
-dependency2.from=CancelUpdateGroup
+dependency2.from=SaveUpdateGroup
 dependency2.to=OpenGroups
 dependency2.type=UsesDependency
 dependency3.from=SaveNewGroup
 dependency3.to=OpenGroups
 dependency3.type=UsesDependency
-dependency4.from=SaveUpdateGroup
+dependency4.from=CancelNewGroup
 dependency4.to=OpenGroups
 dependency4.type=UsesDependency
 objectbench.height=112

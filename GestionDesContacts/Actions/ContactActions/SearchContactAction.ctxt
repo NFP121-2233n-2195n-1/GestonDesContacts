@@ -3,4 +3,6 @@ comment0.target=SearchContactAction
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ SearchContactAction\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=e
 comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
-numComments=2
+comment2.params=filteredContacts\ search
+comment2.target=java.util.LinkedHashMap\ searchMapByWord(java.util.LinkedHashMap,\ java.lang.String)
+numComments=3

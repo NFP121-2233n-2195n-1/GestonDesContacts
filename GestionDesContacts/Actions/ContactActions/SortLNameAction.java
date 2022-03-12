@@ -20,8 +20,12 @@ public class SortLNameAction implements IContactAction
 {    
     public void actionPerformed(ActionEvent e){
         Views.ContactsView view = Controllers.ContactsController.getInstance().getView();
-        LinkedHashMap<Integer, Models.ContactModel> filteredContacts = view.getFilteredContactsMap();
-        
+        LinkedHashMap<Integer, Models.ContactModel> newMap = sortMapByLastName(view.getFilteredContactsMap());
+
+        view.setDataInList(newMap);
+    }
+    
+    public LinkedHashMap<Integer, Models.ContactModel> sortMapByLastName(LinkedHashMap<Integer, Models.ContactModel> filteredContacts){
         
         //sort map and set data in list
         List<Map.Entry<Integer,Models.ContactModel> > list= new ArrayList<Map.Entry<Integer,Models.ContactModel> >(filteredContacts.entrySet());
@@ -46,7 +50,6 @@ public class SortLNameAction implements IContactAction
                 Map.Entry<Integer,Models.ContactModel> item = it.next();
                 newMap.put(item.getKey(),item.getValue());
             }
-            
-            view.setDataInList(newMap);
+        return newMap;
     }
 }
