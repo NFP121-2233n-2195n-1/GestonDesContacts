@@ -53,4 +53,13 @@ public class Globals extends Observable
         setChanged();
         notifyObservers();
     }
+    
+    public void saveGroupToFolder(Models.GroupModel model){
+        if(model==null) return;
+        instance.getGroups().put(model.getGroupID(), model);
+        data.saveGroupsToFolder(instance.getGroups());
+        
+        setChanged();
+        notifyObservers();
+    }
 }

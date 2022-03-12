@@ -1,13 +1,10 @@
 #BlueJ package file
-dependency1.from=GroupModel
-dependency1.to=ContactModel
+dependency1.from=ContactModel
+dependency1.to=PhoneNumber
 dependency1.type=UsesDependency
 dependency2.from=ContactModel
-dependency2.to=PhoneNumber
+dependency2.to=GroupModel
 dependency2.type=UsesDependency
-dependency3.from=ContactModel
-dependency3.to=GroupModel
-dependency3.type=UsesDependency
 objectbench.height=94
 objectbench.width=763
 package.divider.horizontal=0.6
@@ -18,7 +15,7 @@ package.editor.x=526
 package.editor.y=67
 package.frame.height=694
 package.frame.width=800
-package.numDependencies=3
+package.numDependencies=2
 package.numTargets=3
 package.showExtends=true
 package.showUses=true

@@ -9,4 +9,33 @@ package Controllers;
  */
 public class UpdateGroupController
 {
+    private Views.UpdateGroupView view;
+    private static UpdateGroupController instance = new UpdateGroupController();
+    
+    private Models.GroupModel model;
+    
+    public UpdateGroupController()
+    {
+    }
+    
+    public void setModel(Models.GroupModel model){
+        this.model = model;
+        this.view = new Views.UpdateGroupView(model);
+        addListeners();
+        Data.Globals.getInstance().addObserver(view);
+    }
+    
+    public Models.GroupModel getModel(){return this.model;}
+    
+    private void addListeners(){
+        view.getSaveGroupButton().addActionListener(new Actions.GroupActions.SaveUpdateGroup());
+        view.getCancelGroupButton().addActionListener(new Actions.GroupActions.CancelUpdateGroup());
+    }
+    
+    public static UpdateGroupController getInstance(){
+        if(instance == null) instance = new UpdateGroupController();
+        return instance;
+    }
+    
+    public Views.UpdateGroupView getView(){return this.view;}
 }

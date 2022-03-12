@@ -11,7 +11,7 @@ public class NewGroupController
 {
     private Views.NewGroupView view;
     private static NewGroupController instance = new NewGroupController();
-    
+
     public NewGroupController()
     {
         this.view = new Views.NewGroupView();
@@ -20,6 +20,8 @@ public class NewGroupController
     }
     
     private void addListeners(){
+        view.getSaveGroupButton().addActionListener(new Actions.GroupActions.SaveNewGroup());
+        view.getCancelGroupButton().addActionListener(new Actions.GroupActions.CancelNewGroup());
     }
     
     public static NewGroupController getInstance(){

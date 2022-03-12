@@ -3,6 +3,7 @@ import java.util.Observable;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * Write a description of class GroupModel here.
@@ -16,39 +17,47 @@ public class GroupModel extends Observable implements Serializable
     private static int next = 0;
     private String groupName;
     private String groupDescription;
-    private LinkedHashMap<Integer, ContactModel> contacts;
+    private ArrayList<Integer> contactIDs;
     
-    GroupModel(){
+    public GroupModel(String groupName, String groupDescription){
         groupID = (int) (new Date().getTime()/1000)+next;
         next++;
+        contactIDs = new ArrayList<Integer>();
+        this.groupName = groupName;
+        this.groupDescription = groupDescription;
     }
     
     public int getGroupID(){return this.groupID;}
     public String getGroupName(){return this.groupName;}
     public String getGroupDescription(){return this.groupDescription;}
-    public LinkedHashMap<Integer,ContactModel> getContacts(){return this.contacts;}
+    public ArrayList<Integer> getContactIDs(){return this.contactIDs;}
     
     public void setGroupName(String groupName){
         this.groupName = groupName;
         setChanged();
         notifyObservers();
     }
+    
     public void setGroupDescription(String groupDescription){
         this.groupDescription = groupDescription;
         setChanged();
         notifyObservers();
     }
     
-    public void addContact(ContactModel contact){
-        contacts.put(contact.getContactID(), contact);
+    public void addContact(int contactID){
+        contactIDs.add(contactID);
         setChanged();
         notifyObservers();
     }
     
-    public void removeContact(ContactModel contact){
-        contacts.remove(contact.getContactID());
+    public void removeContact(int contactID){
+        contactIDs.remove(contactID);
         setChanged();
         notifyObservers();
+    }
+    
+    public void removeAllContacts(){
+        contactIDs = new ArrayList<Integer>();
     }
 
 }

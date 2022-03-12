@@ -1,5 +1,6 @@
 package Actions.GroupActions;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
 
 
 /**
@@ -11,6 +12,23 @@ import java.awt.event.ActionEvent;
 public class OpenUpdateGroup implements IOpenGroupAction
 {
     public void actionPerformed(ActionEvent e){
-       MainFrame.MainFrame.getInstance().setCurrentPanel(Controllers.ContactsController.getInstance().getView());
+       Controllers.GroupsController groupsCont = Controllers.GroupsController.getInstance();
+       JTable groupsTable = groupsCont.getView().getGroupsTable();
+       int selectedIndex = groupsTable.getSelectedRow();
+       
+       if(selectedIndex == -1){return;}
+       
+       //get selected group
+       int selectedGroupID = (int)groupsTable.getValueAt(selectedIndex,0);
+            
+       //get group object
+       Models.GroupModel model = Data.Globals.getInstance().getGroups().get(selectedGroupID);
+       
+       
+       Controllers.UpdateGroupController updateCont = Controllers.UpdateGroupController.getInstance();
+       updateCont.setModel(model);
+       
+       
+       MainFrame.MainFrame.getInstance().setCurrentPanel(updateCont.getView());
     }
 }

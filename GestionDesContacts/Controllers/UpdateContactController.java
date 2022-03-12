@@ -29,6 +29,7 @@ public class UpdateContactController
     private void addListeners(){
         view.getSaveButton().addActionListener(new Actions.ContactActions.SaveUpdateContactAction());
         view.getCancelButton().addActionListener(new Actions.ContactActions.CancelUpdateContactAction());
+        view.getAddPhoneNumberButton().addActionListener(new Actions.AddRowToTable(view.getTable()));
     }
     
     public static UpdateContactController getInstance(){

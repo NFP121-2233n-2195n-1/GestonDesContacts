@@ -45,7 +45,7 @@ public class NewGroupView extends JPanel implements Observer
         
         title = new JLabel(" New Group");
         
-        tableHeaderContacts = new String[]{"Contact Name", "City", "Add to group"};
+        tableHeaderContacts = new String[]{"ID","Contact Name", "City", "Add to group"};
         
         contactsTableModel = new DefaultTableModel(tableHeaderContacts, 0);
         contactsTable = new JTable(contactsTableModel);
@@ -86,28 +86,74 @@ public class NewGroupView extends JPanel implements Observer
         credentialsPanel.add(groupDescriptionText);
         
         buttonsPanel.setLayout(new GridLayout(1,2));
-        buttonsPanel.add(saveGroup, cancelGroup);
+        buttonsPanel.add(saveGroup);
+        buttonsPanel.add(cancelGroup);
         
         initialiseInterface();
         fillData();
     }
     
+    public JButton getSaveGroupButton(){return this.saveGroup;}
+    public JButton getCancelGroupButton(){return this.cancelGroup;}
+    
+    public JTextField getGroupNameTextField(){return this.groupNameText;}
+    public JTextField getGroupDescriptionTextField(){return this.groupDescriptionText;}
+    
+    public JTable getContactsTable(){return this.contactsTable;}
+    public DefaultTableModel getContactsTableModel(){return this.contactsTableModel;}
+    
     public void initialiseInterface(){}
     
     public void fillData(){
+        setContactsInTable();
+    }
+    
+    public void setContactsInTable(){
         contactsTableModel = new DefaultTableModel(tableHeaderContacts,0){
             public boolean isCellEditable(int row, int col){
                 switch(col){
-                    case 3:
-                        return true;
-                    default: 
+                    case 0:
+                    case 1:
+                    case 2:
                         return false;
+                    default: 
+                        return true;
                 }
             }
+            
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    case 1:
+                    case 2:
+                        return String.class;
+                    default:
+                        return Boolean.class;
+                }
+            };
         };
+        
+        LinkedHashMap<Integer,Models.ContactModel> contacts = Data.Globals.getInstance().getContacts();
+        
+        for(Map.Entry<Integer,Models.ContactModel> entry: contacts.entrySet()){
+            Models.ContactModel contact = entry.getValue();
+            this.contactsTableModel.addRow(new Object[] {contact.getContactID(),contact.getFirstName()+" "+contact.getLastName(),contact.getCity(),false});
+        }
+        
+        contactsTable.setModel(contactsTableModel);
+        contactsTable.revalidate();
+
+        //making IDs hidden
+        contactsTable.getColumnModel().getColumn(0).setMinWidth(0);
+        contactsTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        contactsTable.getColumnModel().getColumn(0).setWidth(0);
+
     }
     
     public void update(Observable o, Object arg){
+        setContactsInTable();
         this.revalidate();
         this.repaint();
     }

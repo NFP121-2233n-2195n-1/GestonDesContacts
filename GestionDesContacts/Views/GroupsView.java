@@ -5,6 +5,8 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.Observer;
 import java.util.Observable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class GroupsView extends JPanel implements Observer{
     private JLabel tablesTitle,title;
@@ -41,14 +43,29 @@ public class GroupsView extends JPanel implements Observer{
         title = new JLabel(" Groups");        
         tablesTitle = new JLabel(" List Of Groups");
           
-        tableHeaderGroups = new String[]{"Group Name", "Nb of contacts"};
+        tableHeaderGroups = new String[]{"Group ID","Group Name", "Nb of contacts"};
         tableHeaderContacts = new String[]{"Contact Name", "Contact city"};
         
-        groupsTableModel = new DefaultTableModel(tableHeaderGroups, 6);
+        groupsTableModel = new DefaultTableModel(tableHeaderGroups, 6){
+            public boolean isCellEditable(int row, int col){
+                switch(col){
+                    default: 
+                        return false;
+                }
+            }
+        };
+        
         groupsTable = new JTable(groupsTableModel);
         groupsScrollPane = new JScrollPane(groupsTable);
         
-        contactsTableModel = new DefaultTableModel(tableHeaderContacts, 6);
+        contactsTableModel = new DefaultTableModel(tableHeaderContacts, 6){
+            public boolean isCellEditable(int row, int col){
+                switch(col){
+                    default: 
+                        return false;
+                }
+            }
+        };
         contactsTable = new JTable(contactsTableModel);
         contactsScrollPane = new JScrollPane(contactsTable);
 
@@ -86,9 +103,67 @@ public class GroupsView extends JPanel implements Observer{
         buttonsPanel.setLayout(new GridLayout(1,2));
         buttonsPanel.add(updateGroup);
         buttonsPanel.add(deleteGroup);
+        
+        fillData();
+    }
+    
+    public void fillData(){
+        fillGroupsTable();
+    }
+    
+    public void fillGroupsTable(){
+        groupsTableModel = new DefaultTableModel(tableHeaderGroups, 0){
+            public boolean isCellEditable(int row, int col){
+                switch(col){
+                    default: 
+                        return false;
+                }
+            }
+            
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    default:
+                        return String.class;
+                }
+            };
+        };
+        
+        LinkedHashMap<Integer,Models.GroupModel> groups = Data.Globals.getInstance().getGroups();
+        for(Map.Entry<Integer,Models.GroupModel> entry: groups.entrySet()){
+            Models.GroupModel group = entry.getValue();
+            this.groupsTableModel.addRow(new Object[] {group.getGroupID(),group.getGroupName(),group.getContactIDs().size()});
+        }
+        
+        groupsTable.setModel(groupsTableModel);
+        groupsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        groupsTable.revalidate();
+    
+        //making IDs hidden
+        groupsTable.getColumnModel().getColumn(0).setMinWidth(0);
+        groupsTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        groupsTable.getColumnModel().getColumn(0).setWidth(0);
+        
+    }
+    
+    public JTable getGroupsTable(){return this.groupsTable;}
+    public JTable getContactsTable(){return this.contactsTable;}
+    public String[] getTableHeaderContacts(){return this.tableHeaderContacts;}
+    
+    public JButton getAddNewGroupButton(){return this.addNewGroup;}
+    public JButton getUpdateGroupButton(){return this.updateGroup;}
+    public JButton getDeleteGroupButton(){return this.deleteGroup;}
+    
+    public void setContactsTableModel(DefaultTableModel contactsTableModel){
+        this.contactsTableModel = contactsTableModel;
+        contactsTable.setModel(contactsTableModel);
+        contactsTable.revalidate();
     }
     
     public void update(Observable o, Object arg){
+        fillGroupsTable();
         this.revalidate();
         this.repaint();
     }

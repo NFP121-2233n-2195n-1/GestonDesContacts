@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class ContactModel implements Serializable
 {
+    private static int next = 0;
     private int contactID;
     private String firstName;
     private String lastName;
@@ -24,7 +25,8 @@ public class ContactModel implements Serializable
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
-        contactID = (int) (new Date().getTime()/1000);
+        contactID = (int) (new Date().getTime()/1000) + next;
+        next++;
         phoneNumbers = new LinkedHashMap<Integer, PhoneNumber>();
     }
     

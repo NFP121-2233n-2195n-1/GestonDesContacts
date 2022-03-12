@@ -1,5 +1,7 @@
 package Actions.GroupActions;
-
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Write a description of class SaveNewGroup here.
@@ -9,27 +11,28 @@ package Actions.GroupActions;
  */
 public class SaveNewGroup implements IGroupAction
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    public void actionPerformed(ActionEvent e){
+        Controllers.NewGroupController cont = Controllers.NewGroupController.getInstance();
+        String groupName = ""+cont.getView().getGroupNameTextField().getText();
+        String groupDescription = ""+cont.getView().getGroupDescriptionTextField().getText();
+        
+        Models.GroupModel newGroup = new Models.GroupModel(groupName,groupDescription);
+        
+        DefaultTableModel model = cont.getView().getContactsTableModel();
+        
+        for(int i=0; i<model.getRowCount(); i++){
+            int contactID = (int)model.getValueAt(i,0);
+            boolean contactIsAdded = (boolean)model.getValueAt(i,3);
+            if(!contactIsAdded){
+                continue;
+            }
+            newGroup.addContact(contactID);
+        }
+        
+        Data.Globals.getInstance().saveGroupToFolder(newGroup);
+        OpenGroups og = new OpenGroups();
+        og.actionPerformed(e);
+        JOptionPane.showMessageDialog(null,"Saved Successfully.", "Saved", JOptionPane.WARNING_MESSAGE);
 
-    /**
-     * Constructor for objects of class SaveNewGroup
-     */
-    public SaveNewGroup()
-    {
-        // initialise instance variables
-        x = 0;
-    }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
     }
 }

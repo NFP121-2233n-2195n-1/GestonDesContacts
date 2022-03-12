@@ -20,6 +20,10 @@ public class GroupsController
     }
     
     private void addListeners(){
+        view.getAddNewGroupButton().addActionListener(new Actions.GroupActions.OpenNewGroup());
+        view.getUpdateGroupButton().addActionListener(new Actions.GroupActions.OpenUpdateGroup());
+
+        view.getGroupsTable().getSelectionModel().addListSelectionListener(new Actions.GroupActions.LoadContactsForGroup());
     }
     
     public static GroupsController getInstance(){

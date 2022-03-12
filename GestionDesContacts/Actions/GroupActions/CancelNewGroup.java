@@ -1,5 +1,6 @@
 package Actions.GroupActions;
-
+import java.awt.event.ActionEvent;
+import javax.swing.*;
 
 /**
  * Write a description of class CancelNewGroup here.
@@ -9,27 +10,13 @@ package Actions.GroupActions;
  */
 public class CancelNewGroup implements IGroupAction
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class CancelNewGroup
-     */
-    public CancelNewGroup()
-    {
-        // initialise instance variables
-        x = 0;
-    }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public void actionPerformed(ActionEvent e){
+        int cancel = JOptionPane.showConfirmDialog(null, "Are you sure you want to cancel?", "Cancel", JOptionPane.YES_NO_OPTION ,JOptionPane.WARNING_MESSAGE);
+                
+        if(cancel == JOptionPane.YES_OPTION){
+            OpenGroups og = new OpenGroups();
+            og.actionPerformed(e);
+        }
+        cancel = 0;
     }
 }

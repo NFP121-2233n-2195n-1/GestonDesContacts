@@ -1,4 +1,16 @@
 #BlueJ class context
 comment0.target=UpdateGroupController
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ UpdateGroupController\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-numComments=1
+comment1.params=
+comment1.target=UpdateGroupController()
+comment2.params=model
+comment2.target=void\ setModel(Models.GroupModel)
+comment3.params=
+comment3.target=Models.GroupModel\ getModel()
+comment4.params=
+comment4.target=void\ addListeners()
+comment5.params=
+comment5.target=UpdateGroupController\ getInstance()
+comment6.params=
+comment6.target=Views.UpdateGroupView\ getView()
+numComments=7
