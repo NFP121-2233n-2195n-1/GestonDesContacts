@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=OriginatorGroup
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ OriginatorGroup\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=state
+comment1.target=void\ setState(Models.GroupModel)
+comment2.params=
+comment2.target=Models.GroupModel\ getState()
+comment3.params=
+comment3.target=MementoGroup\ saveStateToMemento()
+comment4.params=memento
+comment4.target=void\ getStateFromMemento(MementoGroup)
+numComments=5

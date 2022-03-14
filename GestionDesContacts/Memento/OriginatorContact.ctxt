@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=OriginatorContact
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ OriginatorContact\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=state
+comment1.target=void\ setState(Models.ContactModel)
+comment2.params=
+comment2.target=Models.ContactModel\ getState()
+comment3.params=
+comment3.target=MementoContact\ saveStateToMemento()
+comment4.params=memento
+comment4.target=void\ getStateFromMemento(MementoContact)
+numComments=5

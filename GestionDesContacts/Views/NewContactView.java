@@ -7,6 +7,9 @@ import java.util.Observable;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;
+import java.awt.Color;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Write a description of class NewContactView here.
@@ -25,10 +28,9 @@ public class NewContactView extends JPanel implements Observer
     private JTextField firstNameText, lastNameText, cityText;
     
     private JLabel tableTitle;
-    private DefaultTableModel tableModel;
-    private JTable table;
-    private JScrollPane scrollPane;
-    private TableColumn columnRegionCode, columnPhoneNumber;
+    private DefaultTableModel tableModel, groupsTableModel;
+    private JTable table, groupsTable;
+    private JScrollPane scrollPane, groupsScrollPane;
     private String[] tableHeader;
     
     private JLabel titleGroup;
@@ -66,6 +68,10 @@ public class NewContactView extends JPanel implements Observer
         tableModel = new DefaultTableModel(tableHeader, 4);
         table = new JTable(tableModel);
         scrollPane = new JScrollPane(table);
+        
+        groupsTableModel = new DefaultTableModel();
+        groupsTable = new JTable(groupsTableModel);
+        groupsScrollPane = new JScrollPane(groupsTable);
         
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
@@ -108,12 +114,13 @@ public class NewContactView extends JPanel implements Observer
         
         groupsPanel.setLayout(new BorderLayout());
         groupsPanel.add(titleGroup, BorderLayout.NORTH);
+        groupsPanel.add(groupsScrollPane, BorderLayout.CENTER);
         
         buttonsPanel.setLayout(new GridLayout(1,2));
         buttonsPanel.add(saveButton);
         buttonsPanel.add(cancelButton);
         
-        /*A completer ajouter les groups and make them editable*/
+        fillData();
     }
     
     public void update(Observable o, Object arg){
@@ -121,14 +128,81 @@ public class NewContactView extends JPanel implements Observer
         this.repaint();
     }
     
-    //add function to get groups
+    public void fillData(){
+        fillGroup();
+    }
+    
+    public void fillGroup(){
+        groupsTableModel = new DefaultTableModel(new String[]{"","",""},0){
+            public boolean isCellEditable(int row, int col){
+                switch(col){
+                    case 1:
+                        return true;
+                    default: 
+                        return false;
+                }
+            }
+            
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    case 1:
+                        return Boolean.class;
+                    default:
+                        return String.class;
+                }
+            };
+        };
+        
+        
+        LinkedHashMap<Integer,Models.GroupModel> groups = Data.Globals.getInstance().getGroups();
+        for(Map.Entry<Integer,Models.GroupModel> entry: groups.entrySet()){
+            Models.GroupModel group = entry.getValue();
+            //groupID || isContactInGroup? || groupName
+            this.groupsTableModel.addRow(new Object[] {group.getGroupID(),false,group.getGroupName()});
+        }
+        
+        groupsTable.setModel(groupsTableModel);
+        groupsTable.revalidate();
+        
+        
+        //removing border of table
+        groupsTable.setShowGrid(false);
+    
+        //making IDs hidden
+        groupsTable.getColumnModel().getColumn(0).setMinWidth(0);
+        groupsTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        groupsTable.getColumnModel().getColumn(0).setWidth(0);
+        
+    }
+    
+    public void clearInputs(){
+        this.firstNameText.setText("");
+        this.lastNameText.setText("");
+        this.cityText.setText("");
+        
+        //reset phone number table
+        this.tableModel = new DefaultTableModel(tableHeader, 4);
+        table.setModel(tableModel);
+        table.revalidate();
+
+        //this will reset values to false
+        fillGroup();
+    }
     
     public JButton getAddPhoneNumberButton(){return this.addPhoneNumberButton;}
+    
     public JTextField getFirstNameTextField(){return this.firstNameText;}
     public JTextField getLastNameTextField(){return this.lastNameText;}
     public JTextField getCityTextField(){return this.cityText;}
+    
     public JTable getTable(){return this.table;}
     public DefaultTableModel getTableModel(){return this.tableModel;}
+    public JTable getGroupsTable(){return this.groupsTable;}
+    public DefaultTableModel getGroupsTableModel(){return this.groupsTableModel;}
+    
     public JButton getSaveButton(){return this.saveButton;}
     public JButton getCancelButton(){return this.cancelButton;}
 }

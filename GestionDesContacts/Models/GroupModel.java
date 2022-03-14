@@ -51,7 +51,7 @@ public class GroupModel extends Observable implements Serializable
     }
     
     public void removeContact(int contactID){
-        contactIDs.remove(contactID);
+        contactIDs.remove(Integer.valueOf(contactID));
         setChanged();
         notifyObservers();
     }

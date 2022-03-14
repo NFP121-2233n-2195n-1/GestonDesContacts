@@ -13,11 +13,9 @@ public class GroupsView extends JPanel implements Observer{
     
     private JPanel buttonsPanel;
     private JPanel leftPanel, tablesPanel, rightPanel;
-    private JPanel seperatorPanel, bottomContainerPanel;
+    private JPanel seperatorPanel, bottomContainerPanel, undoRedoPanel;
     
-    private JButton addNewGroup;
-    private JButton updateGroup;
-    private JButton deleteGroup;
+    private JButton addNewGroup, updateGroup, deleteGroup, undoDelete, redoDelete;
         
     private DefaultTableModel groupsTableModel;
     private JTable groupsTable;
@@ -39,6 +37,7 @@ public class GroupsView extends JPanel implements Observer{
         buttonsPanel = new JPanel();
         tablesPanel = new JPanel();
         rightPanel = new JPanel();
+        undoRedoPanel = new JPanel();
         
         title = new JLabel(" Groups");        
         tablesTitle = new JLabel(" List Of Groups");
@@ -72,6 +71,8 @@ public class GroupsView extends JPanel implements Observer{
         addNewGroup = new JButton("Add New Group");
         updateGroup = new JButton("Update Group");
         deleteGroup = new JButton("Delete");
+        undoDelete = new JButton("undo delete");
+        redoDelete = new JButton("redo delete");
         
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
@@ -84,8 +85,13 @@ public class GroupsView extends JPanel implements Observer{
         bottomContainerPanel.add(seperatorPanel);
         bottomContainerPanel.add(rightPanel);
         
-        leftPanel.setLayout(new GridLayout(1,1));
+        leftPanel.setLayout(new GridLayout(2,1));
+        leftPanel.add(undoRedoPanel);
         leftPanel.add(addNewGroup);
+        
+        undoRedoPanel.setLayout(new GridLayout(1,2));
+        undoRedoPanel.add(undoDelete);
+        undoRedoPanel.add(redoDelete);
         
         seperatorPanel.setSize(new Dimension(this.getHeight(), 100));
         seperatorPanel.setBackground(Data.Globals.getDarkBlueColor());
@@ -147,6 +153,10 @@ public class GroupsView extends JPanel implements Observer{
         groupsTable.getColumnModel().getColumn(0).setWidth(0);
         
     }
+    
+    
+    public JButton getUndoDeleteButton(){return this.undoDelete;}
+    public JButton getRedoDeleteButton(){return this.redoDelete;}
     
     public JTable getGroupsTable(){return this.groupsTable;}
     public JTable getContactsTable(){return this.contactsTable;}

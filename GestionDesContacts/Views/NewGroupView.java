@@ -152,6 +152,14 @@ public class NewGroupView extends JPanel implements Observer
 
     }
     
+    public void clearInputs(){
+        this.groupNameText.setText("");
+        this.groupDescriptionText.setText("");
+        
+        //reset contacts to false
+        setContactsInTable();
+    }
+    
     public void update(Observable o, Object arg){
         setContactsInTable();
         this.revalidate();

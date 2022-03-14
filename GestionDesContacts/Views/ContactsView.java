@@ -28,13 +28,14 @@ import java.util.Map;
 public class ContactsView extends JPanel implements Observer
 {
     private JLabel title;
-    private JPanel leftPanel, seperatorPanel, rightPanel, buttonsPanel, bottomContainerPanel, searchPanel;
+    private JPanel leftPanel, seperatorPanel, rightPanel, buttonsPanel; 
+    private JPanel bottomContainerPanel, searchPanel, undoRedoPanel;
     
     private JButton searchButton;
     private JTextField searchInput;
     
     private JButton sortByFirstName, sortByLastName, sortByCity;
-    private JButton addNewContact;
+    private JButton addNewContact, undoDelete, redoDelete;
     
     private JButton viewContact, updateContact, deleteContact;
     
@@ -53,10 +54,13 @@ public class ContactsView extends JPanel implements Observer
         bottomContainerPanel = new JPanel();
         searchPanel = new JPanel();
         buttonsPanel = new JPanel();
+        undoRedoPanel = new JPanel();
         
         searchButton = new JButton("search");
         searchInput = new JTextField(10);
         
+        undoDelete = new JButton("undo delete");
+        redoDelete = new JButton("redo delete");
         sortByFirstName = new JButton("sort by first name");
         sortByLastName = new JButton("sort by last name");
         sortByCity = new JButton("sort by city");
@@ -81,12 +85,17 @@ public class ContactsView extends JPanel implements Observer
         bottomContainerPanel.add(seperatorPanel);
         bottomContainerPanel.add(rightPanel);
         
-        leftPanel.setLayout(new GridLayout(4,1));
+        leftPanel.setLayout(new GridLayout(5,1));
         leftPanel.setPreferredSize(new Dimension(200,400));
+        leftPanel.add(undoRedoPanel);
         leftPanel.add(sortByFirstName);
         leftPanel.add(sortByLastName);
         leftPanel.add(sortByCity);
         leftPanel.add(addNewContact);
+        
+        undoRedoPanel.setLayout(new GridLayout(1,2));
+        undoRedoPanel.add(undoDelete);
+        undoRedoPanel.add(redoDelete);
         
         seperatorPanel.setSize(new Dimension(this.getHeight(), 100));
         seperatorPanel.setBackground(Data.Globals.getDarkBlueColor());
@@ -105,12 +114,16 @@ public class ContactsView extends JPanel implements Observer
         buttonsPanel.add(updateContact);
         buttonsPanel.add(deleteContact);
         
+        
         setDataInList(null);
     }
     
     public LinkedHashMap<Integer, Models.ContactModel> getFilteredContactsMap(){
         return this.filteredContacts;
     }
+    
+    public JButton getUndoDeleteButton(){return this.undoDelete;}
+    public JButton getRedoDeleteButton(){return this.redoDelete;}
     
     public JButton getSearchButton(){return this.searchButton;}
     public JButton getAddNewContactButton(){return this.addNewContact;}

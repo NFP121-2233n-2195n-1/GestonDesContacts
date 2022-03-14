@@ -28,10 +28,14 @@ public class SaveNewGroup implements IGroupAction
             }
             newGroup.addContact(contactID);
         }
+
+        //clear fields
+        cont.getView().clearInputs();
         
         Data.Globals.getInstance().saveGroupToFolder(newGroup);
         OpenGroups og = new OpenGroups();
         og.actionPerformed(e);
+        
         JOptionPane.showMessageDialog(null,"Saved Successfully.", "Saved", JOptionPane.WARNING_MESSAGE);
 
     }

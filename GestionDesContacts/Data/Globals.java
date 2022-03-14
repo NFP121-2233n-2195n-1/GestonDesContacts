@@ -62,4 +62,24 @@ public class Globals extends Observable
         setChanged();
         notifyObservers();
     }
+    
+    public void removeContactFromFolder(Models.ContactModel model){
+        if(model == null) return;
+        instance.getContacts().remove(model.getContactID());
+        
+        data.saveContactsToFolder(instance.getContacts());
+        
+        setChanged();
+        notifyObservers();
+    }
+    
+    public void removeGroupFromFolder(Models.GroupModel model){
+        if(model == null)return;
+        instance.getGroups().remove(model.getGroupID());
+        
+        data.saveGroupsToFolder(instance.getGroups());
+        
+        setChanged();
+        notifyObservers();
+    }
 }

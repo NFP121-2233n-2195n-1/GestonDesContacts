@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=CareTakerContact
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ CareTakerContact\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=state
+comment1.target=void\ add(MementoContact)
+comment2.params=state
+comment2.target=void\ remove(MementoContact)
+comment3.params=
+comment3.target=void\ removeLast()
+comment4.params=index
+comment4.target=MementoContact\ get(int)
+comment5.params=
+comment5.target=MementoContact\ getLast()
+numComments=6

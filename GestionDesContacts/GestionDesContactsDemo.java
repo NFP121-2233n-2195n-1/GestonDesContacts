@@ -7,6 +7,8 @@
  */
 public class GestionDesContactsDemo
 {
+    private GestionDesContactsDemo(){}
+    
     public static void main (String[] args){
         MainFrame.MainFrame mainframe = MainFrame.MainFrame.getInstance();
     }
