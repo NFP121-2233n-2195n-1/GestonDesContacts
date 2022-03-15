@@ -90,7 +90,6 @@ public class UpdateContactView extends JPanel implements Observer
         groupsScrollPane = new JScrollPane(groupsTable);
         
         
-        
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
         this.add(bottomContainerPanel, BorderLayout.CENTER);
@@ -142,8 +141,6 @@ public class UpdateContactView extends JPanel implements Observer
         initialiseInterface();
         
         fillData();
-        
-        /*A completer ajouter les groups*/
     }
     
     public void fillData(){

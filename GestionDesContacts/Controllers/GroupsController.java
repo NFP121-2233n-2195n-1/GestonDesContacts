@@ -35,6 +35,9 @@ public class GroupsController
         view.getUpdateGroupButton().addActionListener(new Actions.GroupActions.OpenUpdateGroup());
         view.getDeleteGroupButton().addActionListener(new Actions.GroupActions.DeleteGroup());
         
+        view.getSortByGroupNameButton().addActionListener(new Actions.GroupActions.SortGroupNameAction());
+        view.getSortByNbOfContactsButton().addActionListener(new Actions.GroupActions.SortGroupContactsNbAction());
+        
         view.getUndoDeleteButton().addActionListener(new Actions.GroupActions.UndoDeleteGroup());
         view.getRedoDeleteButton().addActionListener(new Actions.GroupActions.RedoDeleteGroup());
         

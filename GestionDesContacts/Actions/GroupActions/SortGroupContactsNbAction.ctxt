@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=SortGroupContactsNbAction
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ SortGroupContactsNbAction\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=e
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=filteredGroups
+comment2.target=java.util.LinkedHashMap\ sortMapByGroupName(java.util.LinkedHashMap)
+comment3.params=entry1\ entry2
+comment3.target=int\ compare(java.util.Map.Entry,\ java.util.Map.Entry)
+numComments=4

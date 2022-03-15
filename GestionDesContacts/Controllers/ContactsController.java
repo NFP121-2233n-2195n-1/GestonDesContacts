@@ -16,7 +16,6 @@ public class ContactsController
     private Memento.CareTakerContact caretakerUndo;
     private Memento.OriginatorContact originatorRedo;
     private Memento.CareTakerContact caretakerRedo;
-
     
     private ContactsController(){
         this.originatorUndo = new Memento.OriginatorContact();

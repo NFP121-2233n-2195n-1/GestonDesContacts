@@ -14,13 +14,16 @@ public class AddRowToTable implements ActionListener
 {
         JTable table;
         DefaultTableModel tableModel;
+        
         public AddRowToTable(JTable table){
             this.table = table;
             this.tableModel = (DefaultTableModel)table.getModel();
         }
+        
         public void actionPerformed(ActionEvent e){
             tableModel.addRow(new Object[]{});
             table.setModel(tableModel);
             table.revalidate();
         }
+        
 }

@@ -16,7 +16,8 @@ public class GroupsView extends JPanel implements Observer{
     private JPanel seperatorPanel, bottomContainerPanel, undoRedoPanel;
     
     private JButton addNewGroup, updateGroup, deleteGroup, undoDelete, redoDelete;
-        
+    private JButton sortByGroupName, sortByNbOfContacts;    
+    
     private DefaultTableModel groupsTableModel;
     private JTable groupsTable;
     private JScrollPane groupsScrollPane;
@@ -30,6 +31,9 @@ public class GroupsView extends JPanel implements Observer{
     private TableColumn columnContactCity;
     private String[] tableHeaderContacts;
         
+    
+    private LinkedHashMap<Integer, Models.GroupModel> filteredGroups;
+    
     public GroupsView(){
         bottomContainerPanel = new JPanel();
         leftPanel = new JPanel();
@@ -73,6 +77,8 @@ public class GroupsView extends JPanel implements Observer{
         deleteGroup = new JButton("Delete");
         undoDelete = new JButton("undo delete");
         redoDelete = new JButton("redo delete");
+        sortByGroupName = new JButton("sort by group name");
+        sortByNbOfContacts = new JButton("sort by number of contacts");
         
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
@@ -85,8 +91,10 @@ public class GroupsView extends JPanel implements Observer{
         bottomContainerPanel.add(seperatorPanel);
         bottomContainerPanel.add(rightPanel);
         
-        leftPanel.setLayout(new GridLayout(2,1));
+        leftPanel.setLayout(new GridLayout(4,1));
         leftPanel.add(undoRedoPanel);
+        leftPanel.add(sortByGroupName);
+        leftPanel.add(sortByNbOfContacts);
         leftPanel.add(addNewGroup);
         
         undoRedoPanel.setLayout(new GridLayout(1,2));
@@ -113,6 +121,7 @@ public class GroupsView extends JPanel implements Observer{
         fillData();
     }
     
+    
     public void fillData(){
         fillGroupsTable();
     }
@@ -137,8 +146,10 @@ public class GroupsView extends JPanel implements Observer{
             };
         };
         
-        LinkedHashMap<Integer,Models.GroupModel> groups = Data.Globals.getInstance().getGroups();
-        for(Map.Entry<Integer,Models.GroupModel> entry: groups.entrySet()){
+        if(filteredGroups == null){
+            filteredGroups = Data.Globals.getInstance().getGroups();
+        }
+        for(Map.Entry<Integer,Models.GroupModel> entry: filteredGroups.entrySet()){
             Models.GroupModel group = entry.getValue();
             this.groupsTableModel.addRow(new Object[] {group.getGroupID(),group.getGroupName(),group.getContactIDs().size()});
         }
@@ -155,8 +166,22 @@ public class GroupsView extends JPanel implements Observer{
     }
     
     
+    public LinkedHashMap<Integer, Models.GroupModel> getFilteredGroupsMap(){
+        return this.filteredGroups;
+    }
+    
+    public void setFilteredGroupsMap(LinkedHashMap<Integer,Models.GroupModel> filteredGroups){
+        if(filteredGroups == null) return;
+        this.filteredGroups = filteredGroups;
+        fillGroupsTable();
+    }
+    
+    
     public JButton getUndoDeleteButton(){return this.undoDelete;}
     public JButton getRedoDeleteButton(){return this.redoDelete;}
+    
+    public JButton getSortByGroupNameButton(){return this.sortByGroupName;}
+    public JButton getSortByNbOfContactsButton(){return this.sortByNbOfContacts;}
     
     public JTable getGroupsTable(){return this.groupsTable;}
     public JTable getContactsTable(){return this.contactsTable;}

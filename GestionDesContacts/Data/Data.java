@@ -62,6 +62,7 @@ public class Data
     }
 
     public void saveContactsToFolder(LinkedHashMap<Integer,Models.ContactModel> map){
+        if(map == null) return;
         try{
             FileOutputStream out = new FileOutputStream(mainDirectory+"\\contacts.txt");
             ObjectOutputStream oos = new ObjectOutputStream(out);
@@ -73,6 +74,7 @@ public class Data
     }
     
     public void saveGroupsToFolder(LinkedHashMap<Integer,Models.GroupModel> map){
+        if(map == null) return;
         try{
             FileOutputStream out = new FileOutputStream(mainDirectory+"\\groups.txt");
             ObjectOutputStream oos = new ObjectOutputStream(out);

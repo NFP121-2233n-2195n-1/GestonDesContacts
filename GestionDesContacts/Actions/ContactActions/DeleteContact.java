@@ -2,7 +2,8 @@ package Actions.ContactActions;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.util.LinkedHashMap;
-
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Write a description of class DeleteAction here.
@@ -29,15 +30,21 @@ public class DeleteContact implements IContactAction
 
             //remove contact from groups
             LinkedHashMap<Integer, Models.GroupModel> groups = Data.Globals.getInstance().getGroups();
-            
-            //TO BE CONTINUED
+            for (Map.Entry<Integer, Models.GroupModel> entry : groups.entrySet()) {
+                int key = entry.getKey();
+                Models.GroupModel group = entry.getValue();
+                
+                //if group has contact then remove contact from group
+                if(group.getContactIDs().contains(model.getContactID())){
+                    group.removeContact(model.getContactID());
+                }
+            }
             
             //save contact to memento undo
             Memento.OriginatorContact originator = cont.getOriginatorUndo();
             Memento.CareTakerContact caretaker = cont.getCareTakerUndo();
             originator.setState(model);
             caretaker.add(originator.saveStateToMemento());
-            
             
             //delete contact            
             Data.Globals.getInstance().removeContactFromFolder(model);

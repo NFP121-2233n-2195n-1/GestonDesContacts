@@ -27,10 +27,9 @@ public class ViewContactView extends JPanel implements Observer
     private JTextField firstNameText, lastNameText, cityText;
     
     private JLabel tableTitle;
-    private DefaultTableModel tableModel;
-    private JTable table;
-    private JScrollPane scrollPane;
-    private TableColumn columnRegionCode, columnPhoneNumber;
+    private DefaultTableModel tableModel, groupsTableModel;
+    private JTable table, groupsTable;
+    private JScrollPane scrollPane, groupsScrollPane;
     private String[] tableHeader;
     
     private JLabel titleGroup;   
@@ -77,6 +76,10 @@ public class ViewContactView extends JPanel implements Observer
         table = new JTable(tableModel);
         scrollPane = new JScrollPane(table);
         
+        groupsTableModel = new DefaultTableModel();
+        groupsTable = new JTable(groupsTableModel);
+        groupsScrollPane = new JScrollPane(groupsTable);
+        
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
         this.add(bottomContainerPanel, BorderLayout.CENTER);
@@ -113,19 +116,68 @@ public class ViewContactView extends JPanel implements Observer
         
         groupsPanel.setLayout(new BorderLayout());
         groupsPanel.add(titleGroup, BorderLayout.NORTH);
+        groupsPanel.add(groupsScrollPane, BorderLayout.CENTER);
         
         initialiseInterface();
         
         fillData();
-        
-        /*A completer ajouter les groups*/
     }
 
     public void fillData(){
         firstNameText.setText(this.model.getFirstName());
         lastNameText.setText(this.model.getLastName());
         cityText.setText(this.model.getCity());
+        fillPhoneNumbers();
+        fillGroups();
+    }
+    
+    
+    public void fillGroups(){
+        groupsTableModel = new DefaultTableModel(new String[]{"","",""},0){
+            public boolean isCellEditable(int row, int col){
+                switch(col){
+                    default: 
+                        return false;
+                }
+            }
+            
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    case 1:
+                        return Boolean.class;
+                    default:
+                        return String.class;
+                }
+            };
+        };
         
+        
+        LinkedHashMap<Integer,Models.GroupModel> groups = Data.Globals.getInstance().getGroups();
+        for(Map.Entry<Integer,Models.GroupModel> entry: groups.entrySet()){
+            Models.GroupModel group = entry.getValue();
+            //groupID || isContactInGroup? || groupName
+            boolean isContactInGroup = group.getContactIDs().contains(this.model.getContactID());
+            this.groupsTableModel.addRow(new Object[] {group.getGroupID(),isContactInGroup,group.getGroupName()});
+        }
+        
+        groupsTable.setModel(groupsTableModel);
+        groupsTable.revalidate();
+        
+        
+        //removing border of table
+        groupsTable.setShowGrid(false);
+    
+        //making IDs hidden
+        groupsTable.getColumnModel().getColumn(0).setMinWidth(0);
+        groupsTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        groupsTable.getColumnModel().getColumn(0).setWidth(0);
+
+    }
+    
+    public void fillPhoneNumbers(){
         //set phone numbers in table model
         LinkedHashMap<Integer,Models.PhoneNumber> phoneNumbers = this.model.getPhoneNumbers();
         if(phoneNumbers!=null){
@@ -145,8 +197,6 @@ public class ViewContactView extends JPanel implements Observer
         }
         table.setModel(tableModel);
         table.revalidate();
-        
-        /*A completer set groups */
     }
 
     public void initialiseInterface(){
